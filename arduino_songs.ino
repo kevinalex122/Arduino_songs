@@ -1,9 +1,7 @@
 /* 
-  Pink Panther theme
-  Connect a piezo buzzer or speaker to pin 11 or select a new pin.
-  More songs available at https://github.com/robsoncouto/arduino-songs                                            
-                                              
-                                              Robson Couto, 2019
+  Arduino Songs 
+      10/03/2023 Kevin Contreras
+  
 */
 #define NOTE_B0  31
 #define NOTE_C1  33
@@ -108,7 +106,7 @@ int play_lectura=0;
 // change this to make the song slower or faster
 int tempo = 120;
 
-// change this to whichever pin you want to use
+// change this to whichever pin you want to use for the output 
 int buzzer = 11;
 
 // notes of the moledy followed by the duration.
@@ -118,8 +116,6 @@ int buzzer = 11;
 int melody1[] = {
 
   // Pink Panther theme
-  // Score available at https://musescore.com/benedictsong/the-pink-panther
-  // Theme by Masato Nakamura, arranged by Teddy Mason
 
   REST,2, REST,4, REST,8, NOTE_DS4,8, 
   NOTE_E4,-4, REST,8, NOTE_FS4,8, NOTE_G4,-4, REST,8, NOTE_DS4,8,
@@ -145,9 +141,7 @@ int melody1[] = {
 
 int melody2[] = {
 
-
   // Hedwig's theme fromn the Harry Potter Movies
-  // Socre from https://musescore.com/user/3811306/scores/4906610
   
   REST, 2, NOTE_D4, 4,
   NOTE_G4, -4, NOTE_AS4, 8, NOTE_A4, 4,
@@ -190,7 +184,6 @@ int melody2[] = {
 int melody3[] = {
 
   // Game of Thrones
-  // Score available at https://musescore.com/user/8407786/scores/2156716
 
   NOTE_G4,8, NOTE_C4,8, NOTE_DS4,16, NOTE_F4,16, NOTE_G4,8, NOTE_C4,8, NOTE_DS4,16, NOTE_F4,16, //1
   NOTE_G4,8, NOTE_C4,8, NOTE_DS4,16, NOTE_F4,16, NOTE_G4,8, NOTE_C4,8, NOTE_DS4,16, NOTE_F4,16,
@@ -243,8 +236,6 @@ int melody3[] = {
 int melody4[] = {
 
   // Take on me, by A-ha
-  // Score available at https://musescore.com/user/190926/scores/181370
-  // Arranged by Edward Truong
 
   NOTE_FS5,8, NOTE_FS5,8,NOTE_D5,8, NOTE_B4,8, REST,8, NOTE_B4,8, REST,8, NOTE_E5,8, 
   REST,8, NOTE_E5,8, REST,8, NOTE_E5,8, NOTE_GS5,8, NOTE_GS5,8, NOTE_A5,8, NOTE_B5,8,
@@ -276,22 +267,22 @@ int divider = 0, noteDuration = 0;
 void setup() {
 
 
-  pinMode (SONG_1 ,INPUT);
-  pinMode (SONG_2 ,INPUT);
-  pinMode (SONG_3 ,INPUT);
-  pinMode (SONG_4 ,INPUT);
-  pinMode (play ,INPUT);
+  pinMode (SONG_1 ,INPUT); // input pin 2 (dip switch)
+  pinMode (SONG_2 ,INPUT); // input pin 3 (dip switch)
+  pinMode (SONG_3 ,INPUT); // input pin 4 (dip switch)
+  pinMode (SONG_4 ,INPUT); // input pin 5 (dip switch)
+  pinMode (play ,INPUT);   //in put pin 6 (push boton)
 
 }
 
 void loop() {
 
   
-  if (digitalRead(play)==HIGH){
-    play_lectura=1;
+  if (digitalRead(play)==HIGH){      //check if push button was pressed
+    play_lectura=1;  //save value from button play (1 if was pressed and 0 if not)
   };
-  delay(20);
-  if(digitalRead(2)==HIGH && play_lectura==1){
+  delay(20);  // 20ms delay
+  if(digitalRead(2)==HIGH && play_lectura==1){ //check if push button was pressed and the input from pin 2 is hight 
     play_lectura = 0;
 
     // sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
